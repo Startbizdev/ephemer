@@ -4,7 +4,6 @@ import { Hero } from "@/components/blocks/Hero";
 import { FeatureGrid } from "@/components/blocks/FeatureGrid";
 import { CTASection } from "@/components/blocks/CTASection";
 import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
-import { CityLinksSection } from "@/components/blocks/CityLinksSection";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Heading";
@@ -185,8 +184,9 @@ export default function HomePage() {
       {/* CTA */}
       <CTASection />
 
-      <RoleLinksSection variant="home" />
-      <CityLinksSection variant="home" className="pb-16" />
+      <Section className="pt-0 pb-16">
+        <RoleLinksSection variant="home" withSection={false} />
+      </Section>
     </>
   );
 }
