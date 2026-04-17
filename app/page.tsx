@@ -3,7 +3,8 @@ import { Zap, Shield, Users, Clock, ArrowRight, CheckCircle } from "lucide-react
 import { Hero } from "@/components/blocks/Hero";
 import { FeatureGrid } from "@/components/blocks/FeatureGrid";
 import { CTASection } from "@/components/blocks/CTASection";
-import { InternalLinks } from "@/components/blocks/InternalLinks";
+import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
+import { CityLinksSection } from "@/components/blocks/CityLinksSection";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Heading";
@@ -184,22 +185,8 @@ export default function HomePage() {
       {/* CTA */}
       <CTASection />
 
-      {/* Internal links */}
-      <Section className="pt-0 pb-16">
-        <InternalLinks
-          title="Explore by role and location"
-          links={[
-            { href: "/hire-remote-engineers", label: "Hire remote engineers" },
-            { href: "/hire-senior-backend-engineer-san-francisco", label: "Backend · San Francisco" },
-            { href: "/hire-senior-frontend-engineer-new-york", label: "Frontend · New York" },
-            { href: "/hire-ml-engineer-remote", label: "ML engineers · Remote" },
-            { href: "/hire-devops-engineer-austin", label: "DevOps · Austin" },
-            { href: "/hire-staff-engineer-remote", label: "Staff engineers · Remote" },
-            { href: "/for-clients", label: "For clients" },
-            { href: "/how-it-works", label: "How it works" },
-          ]}
-        />
-      </Section>
+      <RoleLinksSection variant="home" />
+      <CityLinksSection variant="home" className="pb-16" />
     </>
   );
 }

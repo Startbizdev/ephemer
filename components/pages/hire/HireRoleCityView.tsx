@@ -8,32 +8,21 @@ import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { LogoStrip } from "@/components/blocks/LogoStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
-import { cities } from "@/lib/cities";
+import {
+  breadcrumbJsonLd,
+  faqJsonLd,
+  cityProfessionalServiceJsonLd,
+  roleOccupationJsonLd,
+  SITE_URL,
+} from "@/lib/seo";
+import { buildRoleCityFaqs } from "@/lib/hireRoleFaqs";
+import { getNearbyCitiesForSlug } from "@/lib/cities";
 import type { CityData } from "@/lib/cities";
 import type { RoleData } from "@/lib/roles";
 
 export function HireRoleCityView({ role, city }: { role: RoleData; city: CityData }) {
-  const faqs = [
-    {
-      q: `How do I hire a ${role.title} in ${city.name} through Ephemer?`,
-      a: `Brief us on your role and ${city.name} context. Within 48 hours we send you 2–4 matched ${role.plural} from our pre-vetted network. Typical time to deployment is 5–10 business days.`,
-    },
-    {
-      q: `What does a ${role.title} cost in ${city.name}?`,
-      a: `${city.name} market rates for ${role.plural} are typically ${city.avgSalary}. Ephemer's engagement model is transparent — no agency markup on top of the engineer's rate.`,
-    },
-    {
-      q: `Are your ${role.plural} senior level?`,
-      a: `Every engineer in the Ephemer network has at least 6 years of experience and has passed a domain-specific technical assessment. You will not receive junior profiles.`,
-    },
-    {
-      q: `Can a ${role.title} work remotely for a ${city.name} startup?`,
-      a: `Yes. All Ephemer engagements are remote-first. If you need US time-zone overlap or occasional on-site presence in ${city.name}, we filter accordingly.`,
-    },
-  ];
-
-  const nearbyCities = cities.filter((c) => c.slug !== city.slug).slice(0, 3);
+  const faqs = buildRoleCityFaqs(role, city);
+  const nearbyCities = getNearbyCitiesForSlug(city.slug);
 
   return (
     <>
@@ -45,7 +34,8 @@ export function HireRoleCityView({ role, city }: { role: RoleData; city: CityDat
           { name: role.title, url: `${SITE_URL}/hire-${role.slug}-${city.slug}` },
         ])}
       />
-      <JsonLd data={serviceJsonLd()} />
+      <JsonLd data={cityProfessionalServiceJsonLd(city)} />
+      <JsonLd data={roleOccupationJsonLd(role, { city })} />
       <JsonLd data={faqJsonLd(faqs)} />
 
       <Section className="pt-24 pb-16">
@@ -57,8 +47,9 @@ export function HireRoleCityView({ role, city }: { role: RoleData; city: CityDat
           Hire a {role.title} in {city.name}
         </Heading>
         <TextBlock size="lg" className="max-w-2xl mb-10">
-          Ephemer deploys senior {role.plural} to {city.name} startups within days.
-          Pre-vetted, high-ownership engineers — without agency overhead.
+          {city.startupsUseCase} When you need {role.plural}, we match on{" "}
+          {role.skills.slice(0, 4).join(", ")} and how hiring actually works in {city.name} — not
+          generic job-board volume.
         </TextBlock>
         <div className="flex flex-col sm:flex-row gap-3">
           <Button href="/contact#book" size="lg">
@@ -94,27 +85,60 @@ export function HireRoleCityView({ role, city }: { role: RoleData; city: CityDat
       </Section>
 
       <Section>
+        <div className="max-w-3xl space-y-8">
+          <div>
+            <Badge variant="indigo" className="mb-3">What this role does</Badge>
+            <Heading as="h2" size="sm" className="mb-4">
+              {role.title} in a startup
+            </Heading>
+            <TextBlock className="leading-relaxed">{role.whatTheyDo}</TextBlock>
+          </div>
+          <div>
+            <Heading as="h2" size="sm" className="mb-4">
+              Strong interview signals
+            </Heading>
+            <TextBlock className="leading-relaxed">{role.hiringSignals}</TextBlock>
+          </div>
+          <div>
+            <Heading as="h2" size="sm" className="mb-4">
+              Hiring mistakes to avoid
+            </Heading>
+            <TextBlock className="leading-relaxed">{role.commonMistakes}</TextBlock>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="pt-0">
         <div className="max-w-3xl">
-          <Badge variant="indigo" className="mb-6">The case for Ephemer</Badge>
+          <Badge variant="indigo" className="mb-4">Local market</Badge>
           <Heading as="h2" size="md" className="mb-6">
-            Why {city.name} startups hire {role.plural} through Ephemer
+            {city.name} context for this hire
+          </Heading>
+          <TextBlock className="leading-relaxed mb-6">{city.hiringNarrative}</TextBlock>
+          <TextBlock className="leading-relaxed">{city.marketInsight}</TextBlock>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="max-w-3xl">
+          <Badge variant="indigo" className="mb-6">Why Ephemer</Badge>
+          <Heading as="h2" size="md" className="mb-6">
+            {role.title} hiring in {city.name} — without the template search
           </Heading>
           <div className="flex flex-col gap-5">
             <TextBlock>
-              Finding a senior {role.title} in {city.name} through traditional recruiting
-              takes 3–5 months. {city.hiringDifficulty} Meanwhile, your product is
-              waiting.
+              {city.hiringDifficulty} A traditional search for a {role.title} here often runs
+              months while your roadmap waits — especially when candidates compare you to{" "}
+              {city.ecosystem.split("—")[0].trim()}.
             </TextBlock>
             <TextBlock>
-              Ephemer maintains an active network of pre-vetted {role.plural} who are
-              ready to engage. When you brief us, we match against your specific
-              stack ({role.skills.slice(0, 3).join(", ")}), your culture, and your
-              current technical priorities — not just a job description.
+              We match {role.plural} on {role.skills.slice(0, 3).join(", ")} and proof of shipping
+              under constraints similar to yours — then you run a tight loop with 2–4 people who
+              already cleared our bar.
             </TextBlock>
             <TextBlock>
-              The result: a focused interview with 2–4 strong candidates, all at the
-              senior level, all cleared on technical depth and execution track record.
-              You deploy in days.
+              Economics align with {city.name} bands ({city.avgSalary}): you see rates before deep
+              interviews, so you are not guessing whether contract fits your burn.
             </TextBlock>
           </div>
         </div>

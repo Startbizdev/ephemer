@@ -8,36 +8,14 @@ import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { LogoStrip } from "@/components/blocks/LogoStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, roleOccupationJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
+import { buildRoleRemoteFaqs } from "@/lib/hireRoleFaqs";
 import { cities } from "@/lib/cities";
 import { roles } from "@/lib/roles";
 import type { RoleData } from "@/lib/roles";
 
 export function HireRoleRemoteView({ role }: { role: RoleData }) {
-  const faqs = [
-    {
-      q: `How do I hire a remote ${role.title} through Ephemer?`,
-      a: `Brief us on your stack, team size, and what you need unblocked. Within 48 hours we surface 2–4 matched ${role.plural} from our pre-vetted network. Typical deployment time is 5–10 business days.`,
-    },
-    {
-      q: `What makes Ephemer ${role.plural} different from agency placements?`,
-      a: `Ephemer does not run a volume-based matching model. Every ${role.title} in our network has passed a domain-specific technical assessment and an execution interview. You receive pre-qualified options, not unfiltered CVs.`,
-    },
-    {
-      q: `Can a remote ${role.title} integrate with my existing team?`,
-      a: `Yes. Ephemer's engineers are experienced in async collaboration, remote codebases, and working within established engineering cultures. We support the first two weeks of onboarding to ensure integration goes smoothly.`,
-    },
-    {
-      q: `What is the typical engagement length for a remote ${role.title}?`,
-      a: `Contract engagements run a minimum of 3 months. Fractional engagements start at 1 month. Most clients extend well beyond the initial term as the engineer becomes embedded in the product.`,
-    },
-    {
-      q: `What tech stack experience do your ${role.plural} have?`,
-      a: `Core skills include: ${role.skills.join(", ")}. We match specifically to your stack, not generically to the job title.`,
-    },
-  ];
-
-  const featuredCities = cities.slice(0, 6);
+  const faqs = buildRoleRemoteFaqs(role);
 
   return (
     <>
@@ -49,6 +27,7 @@ export function HireRoleRemoteView({ role }: { role: RoleData }) {
         ])}
       />
       <JsonLd data={serviceJsonLd()} />
+      <JsonLd data={roleOccupationJsonLd(role)} />
       <JsonLd data={faqJsonLd(faqs)} />
 
       <Section className="pt-24 pb-16">
@@ -60,8 +39,9 @@ export function HireRoleRemoteView({ role }: { role: RoleData }) {
           Hire a remote {role.title}
         </Heading>
         <TextBlock size="lg" className="max-w-2xl mb-10">
-          Ephemer deploys senior remote {role.plural} to US startups at Seed through
-          Series C. Pre-vetted, high-ownership engineers available within days.
+          US startups use Ephemer to deploy senior {role.plural} in days — pre-vetted on{" "}
+          {role.skills.slice(0, 4).join(", ")}, with engagement structures that match runway, not
+          agency retainers.
         </TextBlock>
         <div className="flex flex-col sm:flex-row gap-3">
           <Button href="/contact#book" size="lg">
@@ -108,27 +88,48 @@ export function HireRoleRemoteView({ role }: { role: RoleData }) {
       </Section>
 
       <Section>
+        <div className="max-w-3xl space-y-8">
+          <div>
+            <Badge variant="indigo" className="mb-3">Depth</Badge>
+            <Heading as="h2" size="sm" className="mb-4">
+              What a senior {role.title} does for you
+            </Heading>
+            <TextBlock className="leading-relaxed">{role.whatTheyDo}</TextBlock>
+          </div>
+          <div>
+            <Heading as="h2" size="sm" className="mb-4">
+              What to look for when interviewing
+            </Heading>
+            <TextBlock className="leading-relaxed">{role.hiringSignals}</TextBlock>
+          </div>
+          <div>
+            <Heading as="h2" size="sm" className="mb-4">
+              Common hiring mistakes
+            </Heading>
+            <TextBlock className="leading-relaxed">{role.commonMistakes}</TextBlock>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
         <div className="max-w-3xl">
           <Badge variant="indigo" className="mb-6">What you get</Badge>
           <Heading as="h2" size="md" className="mb-6">
-            A remote {role.title} who ships from day one
+            A remote {role.title} who ships from week one
           </Heading>
           <div className="flex flex-col gap-5">
             <TextBlock>
-              The Ephemer vetting process for {role.plural} is built around one
-              question: does this engineer perform under real startup conditions?
-              That means ownership over outcomes, not tasks — shipping into ambiguity
-              without hand-holding.
+              Our vetting for {role.plural} centers on production judgment: ownership when specs are
+              incomplete, clarity in code review, and calm under incident pressure — not textbook
+              exercises alone.
             </TextBlock>
             <TextBlock>
-              Every engineer in the network has passed a technical assessment covering
-              {" "}{role.skills.slice(0, 3).join(", ")} and relevant architecture
-              scenarios. They have also completed a structured execution interview
-              reviewing past contributions in production systems.
+              Technical depth maps to {role.skills.join(", ")} so you are not re-teaching the stack
+              after hire.
             </TextBlock>
             <TextBlock>
-              When you hire through Ephemer, you get an engineer who is ready to
-              contribute in week one — not week six.
+              When you engage through Ephemer, onboarding is about your product and customers — not
+              whether the engineer can operate at senior level.
             </TextBlock>
           </div>
         </div>
@@ -138,11 +139,14 @@ export function HireRoleRemoteView({ role }: { role: RoleData }) {
         <div className="mb-8">
           <Badge variant="indigo" className="mb-4">By city</Badge>
           <Heading as="h2" size="sm" className="mb-3">
-            Hire a {role.title} by location
+            Hire a {role.title} with local context
           </Heading>
+          <TextBlock muted className="max-w-xl text-sm">
+            Explore city-specific hiring notes and link through to this role in each market.
+          </TextBlock>
         </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2 max-w-3xl">
-          {featuredCities.map((city) => (
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          {cities.map((city) => (
             <a
               key={city.slug}
               href={`/hire-${role.slug}-${city.slug}`}
@@ -183,7 +187,7 @@ export function HireRoleRemoteView({ role }: { role: RoleData }) {
             { href: "/how-it-works", label: "How it works" },
             ...roles
               .filter((r) => r.slug !== role.slug)
-              .slice(0, 3)
+              .slice(0, 5)
               .map((r) => ({
                 href: `/hire-${r.slug}-remote`,
                 label: `${r.title} · Remote`,

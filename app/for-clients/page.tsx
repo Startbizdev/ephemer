@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/Badge";
 import { FeatureGrid } from "@/components/blocks/FeatureGrid";
 import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
+import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
+import { CityLinksSection } from "@/components/blocks/CityLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
 
@@ -150,25 +152,8 @@ export default function ForClientsPage() {
         </div>
       </Section>
 
-      {/* Roles strip */}
-      <Section className="pt-0">
-        <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-5">Roles we cover</p>
-        <div className="flex flex-wrap gap-2">
-          {[
-            "Backend Engineers", "Frontend Engineers", "Fullstack Engineers",
-            "DevOps / SRE", "ML Engineers", "Platform Engineers",
-            "Data Engineers", "Security Engineers", "Mobile Engineers",
-            "Staff Engineers", "Engineering Managers",
-          ].map((role) => (
-            <span
-              key={role}
-              className="px-3 py-1.5 text-sm text-zinc-300 border border-carbon rounded-lg font-mono"
-            >
-              {role}
-            </span>
-          ))}
-        </div>
-      </Section>
+      <RoleLinksSection variant="editorial" />
+      <CityLinksSection variant="editorial" />
 
       {/* FAQ */}
       <Section>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/ui/Heading";
 import { TextBlock } from "@/components/ui/TextBlock";
@@ -8,10 +7,10 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
+import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
+import { CityLinksSection } from "@/components/blocks/CityLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
-import { cities } from "@/lib/cities";
-import { roles } from "@/lib/roles";
 
 export const metadata: Metadata = {
   title: "Hire remote engineers — US startups | Ephemer",
@@ -115,59 +114,9 @@ export default function HireRemoteEngineersPage() {
         </div>
       </Section>
 
-      {/* Roles */}
-      <Section>
-        <div className="mb-10">
-          <Badge variant="indigo" className="mb-4">Roles</Badge>
-          <Heading as="h2" size="md" className="mb-4">Hire by role</Heading>
-          <TextBlock className="max-w-xl">
-            Every role in the Ephemer network is senior-only. Click to explore
-            role-specific pages.
-          </TextBlock>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {roles.map((role) => (
-            <Link
-              key={role.slug}
-              href={`/hire-${role.slug}-remote`}
-              className="flex items-center justify-between p-4 border border-carbon rounded-xl hover:border-zinc-600 hover:bg-carbon/30 transition-all group"
-            >
-              <div>
-                <p className="text-sm font-500 text-snow">{role.title}</p>
-                <p className="text-xs text-zinc-500 mt-0.5 font-mono">{role.seniorityLabel}</p>
-              </div>
-              <ArrowRight size={14} className="text-zinc-600 group-hover:text-indigo-400 transition-colors" />
-            </Link>
-          ))}
-        </div>
-      </Section>
+      <RoleLinksSection variant="hub" />
 
-      {/* Cities */}
-      <Section>
-        <div className="mb-10">
-          <Badge variant="indigo" className="mb-4">By location</Badge>
-          <Heading as="h2" size="md" className="mb-4">Hire by city</Heading>
-          <TextBlock className="max-w-xl">
-            Startups in every major US tech market use Ephemer. Find city-specific
-            engineering hiring insights and engineer availability.
-          </TextBlock>
-        </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {cities.map((city) => (
-            <Link
-              key={city.slug}
-              href={`/hire-remote-engineers-${city.slug}`}
-              className="flex items-center gap-2 p-3.5 border border-carbon rounded-xl hover:border-zinc-600 hover:bg-carbon/30 transition-all group"
-            >
-              <MapPin size={13} className="text-zinc-600 group-hover:text-indigo-400 transition-colors flex-shrink-0" />
-              <div>
-                <p className="text-sm font-500 text-snow">{city.name}</p>
-                <p className="text-xs text-zinc-500 font-mono">{city.state}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </Section>
+      <CityLinksSection variant="hub" />
 
       {/* FAQ */}
       <Section>
