@@ -1,101 +1,205 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Zap, Shield, Users, Clock, ArrowRight, CheckCircle } from "lucide-react";
+import { Hero } from "@/components/blocks/Hero";
+import { FeatureGrid } from "@/components/blocks/FeatureGrid";
+import { CTASection } from "@/components/blocks/CTASection";
+import { InternalLinks } from "@/components/blocks/InternalLinks";
+import { Section } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
+import { Heading } from "@/components/ui/Heading";
+import { TextBlock } from "@/components/ui/TextBlock";
+import { Badge } from "@/components/ui/Badge";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Ephemer — Senior engineers, deployed fast",
+  description:
+    "Ephemer deploys senior engineers into US startups within days. Seed to Series C teams hire vetted contract engineers without recruiter overhead or bloated timelines.",
+  alternates: { canonical: "https://www.ephemer.co" },
+};
+
+const features = [
+  {
+    icon: Zap,
+    title: "Deploy in days, not months",
+    description:
+      "Traditional recruiting drags 3–6 months for senior roles. Ephemer pre-vets every engineer so your team can move on week one.",
+  },
+  {
+    icon: Shield,
+    title: "Senior-only network",
+    description:
+      "Every engineer in the Ephemer network has a minimum of 6 years experience and has passed a rigorous technical and execution bar.",
+  },
+  {
+    icon: Users,
+    title: "Built for startup velocity",
+    description:
+      "Engineers who ship. Not engineers who spectate. Ephemer matches you with operators who thrive in fast, high-ownership environments.",
+  },
+  {
+    icon: Clock,
+    title: "Flexible contract structures",
+    description:
+      "Full-time contract, part-time fractional, or project-based. You get the precision you need without the overhead of a permanent hire.",
+  },
+  {
+    icon: CheckCircle,
+    title: "No recruiter overhead",
+    description:
+      "No agencies. No 30% placement fees. No bloated intermediary layers. You work directly with Ephemer and your engineer from day one.",
+  },
+  {
+    icon: ArrowRight,
+    title: "Ongoing talent pipeline",
+    description:
+      "As your team scales, Ephemer scales with you. Build a repeatable hiring motion that does not restart from zero every quarter.",
+  },
+];
+
+const homeFaqs = [
+  {
+    q: "What types of startups does Ephemer work with?",
+    a: "Ephemer works with US startups from Seed through Series C. Our clients are typically engineering-led companies that move fast and need senior execution, not junior headcount.",
+  },
+  {
+    q: "How is Ephemer different from a staffing agency?",
+    a: "Agencies cast wide nets and extract 20–35% placement fees. Ephemer operates as a precision deployment partner — we maintain an active network of pre-vetted senior engineers and match them to the specific problem you need to solve.",
+  },
+  {
+    q: "How long does it take to get an engineer in place?",
+    a: "Most clients have a first conversation with matched engineers within 72 hours of briefing. Typical time-to-deploy is 5–10 business days depending on role specificity.",
+  },
+  {
+    q: "Do you handle compliance and payments?",
+    a: "Yes. Ephemer handles the full engagement layer — contracts, compliance, payments, and tax documentation — so your team stays focused on product, not admin.",
+  },
+  {
+    q: "What roles does Ephemer cover?",
+    a: "Backend, frontend, fullstack, DevOps, ML, platform, data engineering, security, mobile, and staff-level roles. If you need it in a production codebase, we cover it.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <JsonLd data={serviceJsonLd()} />
+      <JsonLd data={faqJsonLd(homeFaqs)} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero */}
+      <Hero
+        eyebrow="Senior engineers · Contract and fractional"
+        heading={
+          <>
+            The{" "}
+            <em className="not-italic text-indigo-400">ephemeral</em>{" "}
+            team your startup needed yesterday
+          </>
+        }
+        subheading="Ephemer deploys vetted senior engineers into US startups within days. No recruiters. No agency fees. No bloat. Just execution."
+        metrics={[
+          { value: "< 7 days", label: "Average time to deploy" },
+          { value: "6+ yrs", label: "Minimum experience" },
+          { value: "Seed to C", label: "Stage range" },
+          { value: "0%", label: "Recruiter markup" },
+        ]}
+      />
+
+      {/* Features */}
+      <Section>
+        <div className="mb-12">
+          <Badge variant="indigo" className="mb-4">Why Ephemer</Badge>
+          <Heading as="h2" size="lg" className="mb-4 max-w-xl">
+            Designed for startups that cannot afford to wait
+          </Heading>
+          <TextBlock className="max-w-2xl">
+            Every feature of Ephemer exists to eliminate friction between your hiring
+            decision and your engineer writing production code.
+          </TextBlock>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <FeatureGrid features={features} columns={3} />
+      </Section>
+
+      {/* How it works teaser */}
+      <Section className="pt-0">
+        <Container className="px-0">
+          <div className="border border-carbon rounded-2xl p-8 md:p-12">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <Badge variant="indigo" className="mb-4">Process</Badge>
+                <Heading as="h2" size="md" className="mb-4">
+                  From brief to deployed in five steps
+                </Heading>
+                <TextBlock className="mb-6">
+                  Ephemer&apos;s deployment process is designed for speed without
+                  sacrificing quality. Brief us today, interview by Friday.
+                </TextBlock>
+                <div className="flex flex-col gap-3">
+                  {[
+                    "You brief us on the role and context",
+                    "We surface matched profiles within 48h",
+                    "You interview and select",
+                    "Contracts signed, onboarding begins",
+                    "Engineer is shipping code",
+                  ].map((step, i) => (
+                    <div key={step} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full border border-indigo-900 bg-indigo-900/20 flex items-center justify-center">
+                        <span className="text-[10px] font-mono text-indigo-400">{i + 1}</span>
+                      </span>
+                      <span className="text-sm text-zinc-300">{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="border-l border-carbon pl-12 hidden md:block">
+                <p className="font-tight text-5xl font-800 text-snow leading-none mb-2">72h</p>
+                <p className="text-sm text-zinc-400 mb-8">Median time to first engineer profile</p>
+                <p className="font-tight text-5xl font-800 text-snow leading-none mb-2">5–10</p>
+                <p className="text-sm text-zinc-400 mb-8">Business days to deployment</p>
+                <p className="font-tight text-5xl font-800 text-snow leading-none mb-2">0</p>
+                <p className="text-sm text-zinc-400">Intermediary layers between you and your engineer</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <div className="mb-10">
+          <Heading as="h2" size="md" className="mb-3">Common questions</Heading>
+          <TextBlock muted>Straight answers to the questions every CTO asks first.</TextBlock>
+        </div>
+        <div className="max-w-3xl">
+          {homeFaqs.map((faq) => (
+            <div key={faq.q} className="border-b border-carbon py-5 last:border-0">
+              <h3 className="font-500 text-snow mb-2 text-sm md:text-base">{faq.q}</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* CTA */}
+      <CTASection />
+
+      {/* Internal links */}
+      <Section className="pt-0 pb-16">
+        <InternalLinks
+          title="Explore by role and location"
+          links={[
+            { href: "/hire-remote-engineers", label: "Hire remote engineers" },
+            { href: "/hire-senior-backend-engineer-san-francisco", label: "Backend · San Francisco" },
+            { href: "/hire-senior-frontend-engineer-new-york", label: "Frontend · New York" },
+            { href: "/hire-ml-engineer-remote", label: "ML engineers · Remote" },
+            { href: "/hire-devops-engineer-austin", label: "DevOps · Austin" },
+            { href: "/hire-staff-engineer-remote", label: "Staff engineers · Remote" },
+            { href: "/for-clients", label: "For clients" },
+            { href: "/how-it-works", label: "How it works" },
+          ]}
+        />
+      </Section>
+    </>
   );
 }
