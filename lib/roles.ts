@@ -113,23 +113,3 @@ export function getRoleBySlug(slug: string): RoleData | undefined {
 export function getRoleSlugs(): string[] {
   return roles.map((r) => r.slug);
 }
-
-// All combinations for static generation (role × city + role × remote)
-export function getAllLongTailSlugs(): Array<{ role: string; city?: string }> {
-  const roleSlugs = getRoleSlugs();
-  const citySlugs = [
-    "san-francisco", "new-york", "austin", "miami", "seattle",
-    "los-angeles", "boston", "chicago", "denver", "atlanta",
-    "portland", "raleigh", "nashville", "phoenix", "minneapolis",
-    "san-diego", "salt-lake-city", "washington-dc",
-  ];
-
-  const pairs: Array<{ role: string; city?: string }> = [];
-  for (const role of roleSlugs) {
-    pairs.push({ role }); // /hire-[role]-remote
-    for (const city of citySlugs) {
-      pairs.push({ role, city }); // /hire-[role]-[city]
-    }
-  }
-  return pairs;
-}

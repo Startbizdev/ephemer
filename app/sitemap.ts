@@ -1,17 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { getCitySlugs } from "@/lib/cities";
+import { LONG_TAIL_CITY_SLUGS } from "@/lib/hireSlug";
 import { getRoleSlugs } from "@/lib/roles";
 
 const citySlugs = getCitySlugs();
 const roleSlugs = getRoleSlugs();
-
-const longTailCities = [
-  "san-francisco", "new-york", "austin", "miami", "seattle",
-  "los-angeles", "boston", "chicago", "denver", "atlanta",
-  "portland", "raleigh", "nashville", "phoenix", "minneapolis",
-  "san-diego", "salt-lake-city", "washington-dc",
-];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -41,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const longTailCity: MetadataRoute.Sitemap = roleSlugs.flatMap((role) =>
-    longTailCities.map((city) => ({
+    LONG_TAIL_CITY_SLUGS.map((city) => ({
       url: `${SITE_URL}/hire-${role}-${city}`,
       lastModified: now,
       changeFrequency: "monthly",

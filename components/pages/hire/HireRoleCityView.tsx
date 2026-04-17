@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/ui/Heading";
@@ -11,55 +9,11 @@ import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { LogoStrip } from "@/components/blocks/LogoStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
-import { getCityBySlug, cities } from "@/lib/cities";
-import { getRoleBySlug, roles } from "@/lib/roles";
+import { cities } from "@/lib/cities";
+import type { CityData } from "@/lib/cities";
+import type { RoleData } from "@/lib/roles";
 
-interface Props {
-  params: { role: string; city: string };
-}
-
-// Only generate for valid role+city combos
-export async function generateStaticParams() {
-  const longTailCities = [
-    "san-francisco", "new-york", "austin", "miami", "seattle",
-    "los-angeles", "boston", "chicago", "denver", "atlanta",
-    "portland", "raleigh", "nashville", "phoenix", "minneapolis",
-    "san-diego", "salt-lake-city", "washington-dc",
-  ];
-  const params: Array<{ role: string; city: string }> = [];
-  for (const r of roles) {
-    for (const c of longTailCities) {
-      params.push({ role: r.slug, city: c });
-    }
-  }
-  return params;
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const role = getRoleBySlug(params.role);
-  const city = getCityBySlug(params.city);
-  if (!role || !city) return {};
-
-  return {
-    title: `Hire a ${role.title} in ${city.name} — Ephemer`,
-    description: `${city.name} startups hire ${role.plural} through Ephemer. Vetted, senior engineers deployed in days. No agency fees, no bloated hiring cycles.`,
-    alternates: { canonical: `${SITE_URL}/hire-${role.slug}-${city.slug}` },
-    keywords: [
-      `hire ${role.title.toLowerCase()} ${city.name}`,
-      `${role.title.toLowerCase()} ${city.name}`,
-      `contract ${role.title.toLowerCase()} ${city.name}`,
-      `senior ${role.title.toLowerCase()} ${city.name}`,
-      `startup ${role.title.toLowerCase()} ${city.name}`,
-    ],
-  };
-}
-
-export default function RoleCityPage({ params }: Props) {
-  const role = getRoleBySlug(params.role);
-  const city = getCityBySlug(params.city);
-
-  if (!role || !city) notFound();
-
+export function HireRoleCityView({ role, city }: { role: RoleData; city: CityData }) {
   const faqs = [
     {
       q: `How do I hire a ${role.title} in ${city.name} through Ephemer?`,
@@ -79,7 +33,6 @@ export default function RoleCityPage({ params }: Props) {
     },
   ];
 
-  // Nearby cities for internal linking
   const nearbyCities = cities.filter((c) => c.slug !== city.slug).slice(0, 3);
 
   return (
@@ -95,7 +48,6 @@ export default function RoleCityPage({ params }: Props) {
       <JsonLd data={serviceJsonLd()} />
       <JsonLd data={faqJsonLd(faqs)} />
 
-      {/* Hero */}
       <Section className="pt-24 pb-16">
         <div className="flex flex-wrap items-center gap-2 mb-6">
           <Badge variant="indigo">{city.name}</Badge>
@@ -119,7 +71,6 @@ export default function RoleCityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Role + city context */}
       <Section className="pt-0">
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
           <div className="border border-carbon rounded-xl p-6">
@@ -135,7 +86,6 @@ export default function RoleCityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Skills */}
       <Section className="pt-0">
         <LogoStrip
           label={`Core ${role.title} skills in the Ephemer network`}
@@ -143,7 +93,6 @@ export default function RoleCityPage({ params }: Props) {
         />
       </Section>
 
-      {/* Why Ephemer for this role/city */}
       <Section>
         <div className="max-w-3xl">
           <Badge variant="indigo" className="mb-6">The case for Ephemer</Badge>
@@ -171,7 +120,6 @@ export default function RoleCityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* FAQ */}
       <Section>
         <Heading as="h2" size="md" className="mb-8">
           Hiring a {role.title} in {city.name} — questions

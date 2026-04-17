@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Section } from "@/components/layout/Section";
@@ -11,39 +9,10 @@ import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
-import { cities, getCityBySlug } from "@/lib/cities";
 import { roles } from "@/lib/roles";
+import type { CityData } from "@/lib/cities";
 
-interface Props {
-  params: { city: string };
-}
-
-export async function generateStaticParams() {
-  return cities.map((city) => ({ city: city.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const city = getCityBySlug(params.city);
-  if (!city) return {};
-
-  return {
-    title: `Hire remote engineers in ${city.name} — Ephemer`,
-    description: `${city.name} startups hire senior engineers through Ephemer. Vetted contract engineers deployed in days, not months. No recruiter overhead.`,
-    alternates: { canonical: `${SITE_URL}/hire-remote-engineers-${city.slug}` },
-    keywords: [
-      `hire engineers ${city.name}`,
-      `remote engineers ${city.name}`,
-      `contract engineers ${city.name}`,
-      `senior software engineers ${city.name}`,
-      `startup hiring ${city.name}`,
-    ],
-  };
-}
-
-export default function CityPage({ params }: Props) {
-  const city = getCityBySlug(params.city);
-  if (!city) notFound();
-
+export function HireRemoteEngineersCityView({ city }: { city: CityData }) {
   const faqs = [
     {
       q: `How does Ephemer work for ${city.name} startups?`,
@@ -75,7 +44,6 @@ export default function CityPage({ params }: Props) {
       <JsonLd data={serviceJsonLd()} />
       <JsonLd data={faqJsonLd(faqs)} />
 
-      {/* Hero */}
       <Section className="pt-24 pb-16">
         <div className="flex items-center gap-2 mb-6">
           <Badge variant="indigo">
@@ -101,7 +69,6 @@ export default function CityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* City context */}
       <Section className="pt-0">
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
           <div className="border border-carbon rounded-xl p-6">
@@ -141,7 +108,6 @@ export default function CityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Why Ephemer in this city */}
       <Section>
         <div className="max-w-3xl">
           <Badge variant="indigo" className="mb-6">Why Ephemer</Badge>
@@ -167,7 +133,6 @@ export default function CityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Roles available */}
       <Section>
         <div className="mb-10">
           <Badge variant="indigo" className="mb-4">Roles in {city.name}</Badge>
@@ -192,7 +157,6 @@ export default function CityPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* FAQ */}
       <Section>
         <Heading as="h2" size="md" className="mb-8">
           Hiring in {city.name} — questions

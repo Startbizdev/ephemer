@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { Heading } from "@/components/ui/Heading";
@@ -11,39 +9,11 @@ import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { LogoStrip } from "@/components/blocks/LogoStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
-import { getRoleBySlug, roles } from "@/lib/roles";
 import { cities } from "@/lib/cities";
+import { roles } from "@/lib/roles";
+import type { RoleData } from "@/lib/roles";
 
-interface Props {
-  params: { role: string };
-}
-
-export async function generateStaticParams() {
-  return roles.map((r) => ({ role: r.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const role = getRoleBySlug(params.role);
-  if (!role) return {};
-
-  return {
-    title: `Hire a remote ${role.title} — Ephemer`,
-    description: `Hire a senior remote ${role.title} for your US startup. Ephemer deploys vetted ${role.plural} within days. No agency fees, no bloated hiring timelines.`,
-    alternates: { canonical: `${SITE_URL}/hire-${role.slug}-remote` },
-    keywords: [
-      `hire remote ${role.title.toLowerCase()}`,
-      `remote ${role.title.toLowerCase()}`,
-      `contract ${role.title.toLowerCase()} remote`,
-      `senior ${role.title.toLowerCase()} remote`,
-      `hire ${role.title.toLowerCase()} startup`,
-    ],
-  };
-}
-
-export default function RoleRemotePage({ params }: Props) {
-  const role = getRoleBySlug(params.role);
-  if (!role) notFound();
-
+export function HireRoleRemoteView({ role }: { role: RoleData }) {
   const faqs = [
     {
       q: `How do I hire a remote ${role.title} through Ephemer?`,
@@ -67,7 +37,6 @@ export default function RoleRemotePage({ params }: Props) {
     },
   ];
 
-  // Sample cities for city-based internal linking
   const featuredCities = cities.slice(0, 6);
 
   return (
@@ -82,7 +51,6 @@ export default function RoleRemotePage({ params }: Props) {
       <JsonLd data={serviceJsonLd()} />
       <JsonLd data={faqJsonLd(faqs)} />
 
-      {/* Hero */}
       <Section className="pt-24 pb-16">
         <div className="flex flex-wrap items-center gap-2 mb-6">
           <Badge variant="indigo">Remote</Badge>
@@ -106,7 +74,6 @@ export default function RoleRemotePage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Role context */}
       <Section className="pt-0">
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
           <div className="border border-carbon rounded-xl p-6">
@@ -133,7 +100,6 @@ export default function RoleRemotePage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Skills */}
       <Section className="pt-0">
         <LogoStrip
           label={`Core ${role.title} skills in the Ephemer network`}
@@ -141,7 +107,6 @@ export default function RoleRemotePage({ params }: Props) {
         />
       </Section>
 
-      {/* What Ephemer delivers */}
       <Section>
         <div className="max-w-3xl">
           <Badge variant="indigo" className="mb-6">What you get</Badge>
@@ -169,7 +134,6 @@ export default function RoleRemotePage({ params }: Props) {
         </div>
       </Section>
 
-      {/* City-based links */}
       <Section>
         <div className="mb-8">
           <Badge variant="indigo" className="mb-4">By city</Badge>
@@ -191,7 +155,6 @@ export default function RoleRemotePage({ params }: Props) {
         </div>
       </Section>
 
-      {/* FAQ */}
       <Section>
         <Heading as="h2" size="md" className="mb-8">
           Hiring a remote {role.title} — questions
