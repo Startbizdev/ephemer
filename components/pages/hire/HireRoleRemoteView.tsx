@@ -10,7 +10,6 @@ import { LogoStrip } from "@/components/blocks/LogoStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, roleOccupationJsonLd, serviceJsonLd, SITE_URL } from "@/lib/seo";
 import { buildRoleRemoteFaqs } from "@/lib/hireRoleFaqs";
-import { cities } from "@/lib/cities";
 import { roles } from "@/lib/roles";
 import type { RoleData } from "@/lib/roles";
 
@@ -132,30 +131,6 @@ export function HireRoleRemoteView({ role }: { role: RoleData }) {
               whether the engineer can operate at senior level.
             </TextBlock>
           </div>
-        </div>
-      </Section>
-
-      <Section>
-        <div className="mb-8">
-          <Badge variant="indigo" className="mb-4">By city</Badge>
-          <Heading as="h2" size="sm" className="mb-3">
-            Hire a {role.title} with local context
-          </Heading>
-          <TextBlock muted className="max-w-xl text-sm">
-            Explore city-specific hiring notes and link through to this role in each market.
-          </TextBlock>
-        </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {cities.map((city) => (
-            <a
-              key={city.slug}
-              href={`/hire-${role.slug}-${city.slug}`}
-              className="flex items-center justify-between p-4 border border-carbon rounded-xl hover:border-zinc-600 hover:bg-carbon/30 transition-all group"
-            >
-              <span className="text-sm font-500 text-snow">{city.name}</span>
-              <ArrowRight size={13} className="text-zinc-600 group-hover:text-indigo-400 transition-colors" />
-            </a>
-          ))}
         </div>
       </Section>
 

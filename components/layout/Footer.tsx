@@ -5,20 +5,20 @@ import { Container } from "./Container";
 const footerLinks = {
   Company: [
     { href: "/about", label: "About" },
-    { href: "/how-it-works", label: "How it works" },
+    { href: "/about/network", label: "Our network" },
     { href: "/contact", label: "Contact" },
-    { href: "/careers", label: "Careers" },
+    { href: "/blog", label: "Blog" },
   ],
   Services: [
-    { href: "/for-clients", label: "For clients" },
-    { href: "/for-talent", label: "For talent" },
-    { href: "/hire-remote-engineers", label: "Hire engineers" },
+    { href: "/hire", label: "For clients" },
+    { href: "/talent", label: "For talent" },
+    { href: "/profiles", label: "Profiles" },
   ],
-  SEO: [
-    { href: "/hire-remote-engineers", label: "Hire remote engineers" },
-    { href: "/hire-senior-backend-engineer-san-francisco", label: "Backend engineers, SF" },
-    { href: "/hire-ml-engineer-remote", label: "ML engineers, remote" },
-    { href: "/hire-devops-engineer-new-york", label: "DevOps, New York" },
+  Resources: [
+    { href: "/hire/pricing", label: "Pricing" },
+    { href: "/hire/case-studies", label: "Case studies" },
+    { href: "/hire-backend-engineer-remote", label: "Backend engineers" },
+    { href: "/hire-ml-engineer-remote", label: "ML engineers" },
   ],
 };
 
@@ -86,11 +86,14 @@ export function Footer() {
             © {new Date().getFullYear()} Ephemer. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+            <Link href="/legal/privacy" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
               Privacy
             </Link>
-            <Link href="/terms" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+            <Link href="/legal/terms" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
               Terms
+            </Link>
+            <Link href="/legal/cookies" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+              Cookies
             </Link>
           </div>
         </div>

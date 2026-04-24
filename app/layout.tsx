@@ -28,6 +28,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: "/logos/ephemer_mark_indigo.png",
+  },
   title: {
     default: `${SITE_NAME} — Senior engineers, deployed fast`,
     template: `%s | ${SITE_NAME}`,

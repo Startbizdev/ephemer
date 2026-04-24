@@ -1,72 +1,159 @@
 import type { Metadata } from "next";
-import { Mail } from "lucide-react";
+import { Hero } from "@/components/blocks/Hero";
 import { Section } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Heading";
 import { TextBlock } from "@/components/ui/TextBlock";
-import { Badge } from "@/components/ui/Badge";
-import { CalendlyEmbed } from "@/components/blocks/CalendlyEmbed";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, SITE_URL } from "@/lib/seo";
+import { Mail, Phone, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact — Book a 15-min call | Ephemer",
+  title: "Contact — Ephemer",
   description:
-    "Book a 15-minute intro call with Ephemer. Tell us what you are building and what you need. No pitch deck. Direct conversation.",
-  alternates: { canonical: `${SITE_URL}/contact` },
+    "Get in touch with the Ephemer team. Have questions about hiring, joining our network, or anything else? We'd love to hear from you.",
+  alternates: { canonical: "https://www.ephemer.co/contact" },
 };
 
 export default function ContactPage() {
   return (
     <>
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", url: SITE_URL },
-          { name: "Contact", url: `${SITE_URL}/contact` },
-        ])}
+      <Hero
+        eyebrow="Get in touch"
+        heading="Let's talk"
+        subheading="Have questions about hiring engineers, joining our network, or anything else? Reach out and we'll get back to you within 24 hours."
       />
 
-      <Section className="pt-24 pb-16">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Left: copy */}
+      <Section>
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Contact Form */}
           <div>
-            <Badge variant="indigo" className="mb-6">Get in touch</Badge>
-            <Heading as="h1" size="lg" className="mb-6">
-              Book a 15-minute intro call
+            <Heading as="h2" size="md" className="mb-6">
+              Send us a message
             </Heading>
-            <TextBlock className="mb-8">
-              No pitch deck. No sales process. A direct conversation about your
-              engineering needs, your timeline, and whether Ephemer is the right fit.
-            </TextBlock>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-500 text-snow mb-2">
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-4 py-2.5 bg-carbon border border-carbon rounded-lg text-snow placeholder-zinc-500 focus:outline-none focus:border-indigo-600 transition-colors"
+                  placeholder="Your name"
+                />
+              </div>
 
-            <div className="flex flex-col gap-4 mb-10">
-              {[
-                "You tell us what you need to build",
-                "We tell you what we can match",
-                "If there is a fit, we move to profiling within 48h",
-              ].map((item, i) => (
-                <div key={item} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full border border-indigo-900 bg-indigo-900/20 flex items-center justify-center">
-                    <span className="text-[10px] font-mono text-indigo-400">{i + 1}</span>
-                  </span>
-                  <span className="text-sm text-zinc-300">{item}</span>
-                </div>
-              ))}
-            </div>
+              <div>
+                <label className="block text-sm font-500 text-snow mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  className="w-full px-4 py-2.5 bg-carbon border border-carbon rounded-lg text-snow placeholder-zinc-500 focus:outline-none focus:border-indigo-600 transition-colors"
+                  placeholder="you@company.com"
+                />
+              </div>
 
-            <div className="flex items-center gap-3 mt-8 pt-8 border-t border-carbon">
-              <Mail size={16} className="text-zinc-500" />
-              <a
-                href="mailto:contact@ephemer.co"
-                className="text-sm text-zinc-400 hover:text-snow transition-colors font-mono"
+              <div>
+                <label className="block text-sm font-500 text-snow mb-2">
+                  Company
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-2.5 bg-carbon border border-carbon rounded-lg text-snow placeholder-zinc-500 focus:outline-none focus:border-indigo-600 transition-colors"
+                  placeholder="Your company"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-500 text-snow mb-2">
+                  What can we help with?
+                </label>
+                <select
+                  className="w-full px-4 py-2.5 bg-carbon border border-carbon rounded-lg text-snow focus:outline-none focus:border-indigo-600 transition-colors"
+                >
+                  <option value="">Select an option</option>
+                  <option value="hire">Hire engineers</option>
+                  <option value="join">Join our network</option>
+                  <option value="partnership">Partnership inquiry</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-500 text-snow mb-2">
+                  Message
+                </label>
+                <textarea
+                  rows={5}
+                  className="w-full px-4 py-2.5 bg-carbon border border-carbon rounded-lg text-snow placeholder-zinc-500 focus:outline-none focus:border-indigo-600 transition-colors resize-none"
+                  placeholder="Tell us more about your needs..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-snow font-600 rounded-lg transition-colors"
               >
-                contact@ephemer.co
-              </a>
-            </div>
+                Send message
+              </button>
+            </form>
           </div>
 
-          {/* Right: Calendly */}
-          <div id="book">
-            <CalendlyEmbed url="https://calendly.com/ephemer/15min" />
+          {/* Contact Info */}
+          <div className="space-y-8">
+            <div>
+              <Heading as="h2" size="md" className="mb-6">
+                Other ways to reach us
+              </Heading>
+            </div>
+
+            {/* Email */}
+            <div className="border border-carbon rounded-lg p-6">
+              <div className="flex items-start gap-4">
+                <Mail className="w-6 h-6 text-indigo-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-600 text-snow mb-1">Email</h3>
+                  <p className="text-sm text-zinc-400 mb-3">
+                    For general inquiries
+                  </p>
+                  <a
+                    href="mailto:hello@ephemer.co"
+                    className="text-indigo-400 hover:text-indigo-300 text-sm font-500 transition-colors"
+                  >
+                    hello@ephemer.co
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div className="border border-carbon rounded-lg p-6">
+              <div className="flex items-start gap-4">
+                <Phone className="w-6 h-6 text-indigo-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-600 text-snow mb-1">Phone</h3>
+                  <p className="text-sm text-zinc-400 mb-3">
+                    Schedule a call with us
+                  </p>
+                  <Link
+                    href="/contact/book-call"
+                    className="text-indigo-400 hover:text-indigo-300 text-sm font-500 transition-colors flex items-center gap-1"
+                  >
+                    Book a call <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Response Time */}
+            <div className="border border-indigo-900/30 bg-indigo-900/10 rounded-lg p-6">
+              <h3 className="font-600 text-snow mb-2">Response time</h3>
+              <p className="text-sm text-zinc-400">
+                We typically respond to all inquiries within 24 business hours. For urgent matters, consider booking a call instead.
+              </p>
+            </div>
           </div>
         </div>
       </Section>

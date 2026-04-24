@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { Container } from "./Container";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/for-clients", label: "For clients" },
-  { href: "/for-talent", label: "For talent" },
+  { href: "/hire", label: "Hire" },
+  { href: "/talent", label: "Talent" },
+  { href: "/profiles", label: "Profiles" },
   { href: "/about", label: "About" },
 ];
 
@@ -23,11 +24,15 @@ export function Navbar() {
       <Container>
         <nav className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="font-tight text-xl font-800 tracking-tight text-snow">
-              ephemer
-            </span>
-            <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 group-hover:bg-indigo-400 transition-colors" />
+          <Link href="/" className="relative h-10 w-auto">
+            <Image
+              src="/logos/ephemer_lockup_snow.png"
+              alt="Ephemer"
+              height={40}
+              width={140}
+              priority
+              className="object-contain"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -57,7 +62,7 @@ export function Navbar() {
               Contact
             </Link>
             <Link
-              href="/contact#book"
+              href="/contact/book-call"
               className="px-4 py-2 text-sm font-600 text-snow bg-indigo-600 rounded-lg hover:bg-indigo-500 transition-colors"
             >
               Book a call
@@ -103,7 +108,7 @@ export function Navbar() {
                 Contact
               </Link>
               <Link
-                href="/contact#book"
+                href="/contact/book-call"
                 onClick={() => setOpen(false)}
                 className="px-4 py-2.5 text-sm font-600 text-snow bg-indigo-600 rounded-lg text-center"
               >

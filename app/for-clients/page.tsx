@@ -8,7 +8,6 @@ import { FeatureGrid } from "@/components/blocks/FeatureGrid";
 import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
-import { CityLinksSection } from "@/components/blocks/CityLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
 
@@ -153,7 +152,6 @@ export default function ForClientsPage() {
       </Section>
 
       <RoleLinksSection variant="editorial" />
-      <CityLinksSection variant="editorial" />
 
       {/* FAQ */}
       <Section>

@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/blocks/CTASection";
 import { InternalLinks } from "@/components/blocks/InternalLinks";
 import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
-import { CityLinksSection } from "@/components/blocks/CityLinksSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
 
@@ -115,8 +114,6 @@ export default function HireRemoteEngineersPage() {
       </Section>
 
       <RoleLinksSection variant="hub" />
-
-      <CityLinksSection variant="hub" />
 
       {/* FAQ */}
       <Section>

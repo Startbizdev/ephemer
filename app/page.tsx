@@ -3,7 +3,7 @@ import { Zap, Shield, Users, Clock, ArrowRight, CheckCircle } from "lucide-react
 import { Hero } from "@/components/blocks/Hero";
 import { FeatureGrid } from "@/components/blocks/FeatureGrid";
 import { CTASection } from "@/components/blocks/CTASection";
-import { RoleLinksSection } from "@/components/blocks/RoleLinksSection";
+import { TrustedBySection } from "@/components/blocks/TrustedBySection";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Heading";
@@ -121,6 +121,9 @@ export default function HomePage() {
         <FeatureGrid features={features} columns={3} />
       </Section>
 
+      {/* Trusted by */}
+      <TrustedBySection />
+
       {/* How it works teaser */}
       <Section className="pt-0">
         <Container className="px-0">
@@ -183,10 +186,6 @@ export default function HomePage() {
 
       {/* CTA */}
       <CTASection />
-
-      <Section className="pt-0 pb-16">
-        <RoleLinksSection variant="home" withSection={false} />
-      </Section>
     </>
   );
 }
