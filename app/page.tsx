@@ -4,6 +4,7 @@ import { Hero } from "@/components/blocks/Hero";
 import { FeatureGrid } from "@/components/blocks/FeatureGrid";
 import { CTASection } from "@/components/blocks/CTASection";
 import { TrustedBySection } from "@/components/blocks/TrustedBySection";
+import { TestimonialSection } from "@/components/blocks/TestimonialSection";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { Heading } from "@/components/ui/Heading";
@@ -24,37 +25,19 @@ const features = [
     icon: Zap,
     title: "Deploy in days, not months",
     description:
-      "Traditional recruiting drags 3–6 months for senior roles. Ephemer pre-vets every engineer so your team can move on week one.",
+      "Traditional recruiting drags for months. We surface matched profiles within 48 hours so you ship faster.",
   },
   {
     icon: Shield,
-    title: "Senior-only network",
+    title: "Senior only vetting",
     description:
-      "Every engineer in the Ephemer network has a minimum of 6 years experience and has passed a rigorous technical and execution bar.",
+      "Every engineer passes a rigorous technical assessment, reference checks, and a mission fit interview before your first conversation.",
   },
   {
     icon: Users,
-    title: "Built for startup velocity",
+    title: "Direct engagement",
     description:
-      "Engineers who ship. Not engineers who spectate. Ephemer matches you with operators who thrive in fast, high-ownership environments.",
-  },
-  {
-    icon: Clock,
-    title: "Flexible contract structures",
-    description:
-      "Full-time contract, part-time fractional, or project-based. You get the precision you need without the overhead of a permanent hire.",
-  },
-  {
-    icon: CheckCircle,
-    title: "No recruiter overhead",
-    description:
-      "No agencies. No 30% placement fees. No bloated intermediary layers. You work directly with Ephemer and your engineer from day one.",
-  },
-  {
-    icon: ArrowRight,
-    title: "Ongoing talent pipeline",
-    description:
-      "As your team scales, Ephemer scales with you. Build a repeatable hiring motion that does not restart from zero every quarter.",
+      "No bloated processes. You work directly with your engineer while we handle contracts, compliance, and payments.",
   },
 ];
 
@@ -69,15 +52,19 @@ const homeFaqs = [
   },
   {
     q: "How long does it take to get an engineer in place?",
-    a: "Most clients have a first conversation with matched engineers within 72 hours of briefing. Typical time-to-deploy is 5–10 business days depending on role specificity.",
+    a: "Most clients have a first conversation with matched engineers within 72 hours of briefing. Typical time-to-deploy is 5–10 business days depending on role specificity. How quickly can you hire? Most teams interview their first match within 72 hours. Ready to start? Book a call.",
   },
   {
     q: "Do you handle compliance and payments?",
-    a: "Yes. Ephemer handles the full engagement layer — contracts, compliance, payments, and tax documentation — so your team stays focused on product, not admin.",
+    a: "Yes. Ephemer handles the full engagement layer — contracts, compliance, payments, and tax documentation — so your team stays focused on product, not admin. What if the engineer is not a good fit? We surface replacement profiles at no additional cost within 72 hours. We have never left a client without a solution.",
   },
   {
     q: "What roles does Ephemer cover?",
-    a: "Backend, frontend, fullstack, DevOps, ML, platform, data engineering, security, mobile, and staff-level roles. If you need it in a production codebase, we cover it.",
+    a: "We cover four core disciplines: Software Engineers (Backend, Frontend, Fullstack, Mobile), Infrastructure Engineers, AI and Data Engineers, and Product Engineers. We staff from Senior to CTO level.",
+  },
+  {
+    q: "Do you handle permanent placements?",
+    a: "Yes. In addition to contractor engagements, Ephemer can manage permanent placement for senior and executive engineering profiles. Contact us to discuss the right structure for your hiring need.",
   },
 ];
 
@@ -90,19 +77,13 @@ export default function HomePage() {
       {/* Hero */}
       <Hero
         eyebrow="Senior engineers · Contract and fractional"
-        heading={
-          <>
-            The{" "}
-            <em className="not-italic text-indigo-400">ephemeral</em>{" "}
-            team your startup needed yesterday
-          </>
-        }
-        subheading="Ephemer deploys vetted senior engineers into US startups within days. No recruiters. No agency fees. No bloat. Just execution."
+        heading="Senior engineers, deployed in days."
+        subheading="Hire for the mission, not for the decade. Ephemer matches US Seed to Series C startups with pre-vetted senior engineers ready to ship production code. Contractor-first, with optional permanent placement."
         metrics={[
-          { value: "< 7 days", label: "Average time to deploy" },
+          { value: "48h", label: "Time to first profile" },
           { value: "6+ yrs", label: "Minimum experience" },
           { value: "Seed to C", label: "Stage range" },
-          { value: "0%", label: "Recruiter markup" },
+          { value: "Pre-vetted", label: "Every engineer" },
         ]}
       />
 
@@ -123,6 +104,9 @@ export default function HomePage() {
 
       {/* Trusted by */}
       <TrustedBySection />
+
+      {/* Testimonial */}
+      <TestimonialSection />
 
       {/* How it works teaser */}
       <Section className="pt-0">

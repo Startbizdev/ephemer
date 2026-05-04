@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 const steps = [
   {
     step: "01",
-    title: "Brief us on your mission",
+    title: "Brief us today",
     description:
-      "A 30-minute conversation to understand your stack, team velocity, and what actually blocks shipping. Not a form—a real conversation with someone who has worked in startups.",
+      "Tell us about your stack, mission, and timeline. A 30-minute conversation to understand what actually blocks shipping. Not a form—a real conversation with someone who has worked in startups.",
     details: [
       "Technical stack and production constraints",
       "Team topology and engineering culture",
@@ -35,9 +35,9 @@ const steps = [
   },
   {
     step: "02",
-    title: "We surface matched profiles",
+    title: "Profiles within 48h",
     description:
-      "Within 48 hours, Ephemer sends 3–5 engineer profiles. Every profile includes technical depth, relevant project history, and our honest assessment of fit for your problem.",
+      "We surface 2 to 3 pre-vetted senior engineers. Every profile includes technical depth, relevant project history, and our honest assessment of fit for your problem.",
     details: [
       "Technical summary and skill alignment",
       "Production experience in your stack",
@@ -47,9 +47,9 @@ const steps = [
   },
   {
     step: "03",
-    title: "You run a focused interview",
+    title: "You decide",
     description:
-      "One technical session to validate judgment. One conversation about ownership and velocity. No multi-round ceremonies or exhausting interview loops.",
+      "Run one focused technical interview with your top choice. One conversation to validate judgment. No multi-round ceremonies or exhausting interview loops.",
     details: [
       "System design or architecture discussion",
       "Production decision-making under ambiguity",
@@ -59,9 +59,9 @@ const steps = [
   },
   {
     step: "04",
-    title: "Contracts and compliance handled",
+    title: "Ephemer handles compliance",
     description:
-      "Ephemer manages the full engagement layer—contract terms, compliance, IP assignment, payment processing, tax documentation—so your team focuses on onboarding, not admin.",
+      "Contracts, IP assignment, and payments are sorted. We manage the full engagement layer—contract terms, compliance, tax documentation—so your team focuses on onboarding, not admin.",
     details: [
       "Engagement agreement finalized",
       "Tax documentation and compliance (Deel integration)",
@@ -71,9 +71,9 @@ const steps = [
   },
   {
     step: "05",
-    title: "Engineer is in your codebase",
+    title: "Shipping week one",
     description:
-      "Your engineer starts shipping day one. Onboarding is about your product and customers—not whether the engineer can operate at senior level.",
+      "Your engineer integrates and starts writing production code. Onboarding is about your product and customers—not whether the engineer can operate at senior level.",
     details: [
       "Access provisioning (Git, Slack, cloud, VPN)",
       "Architecture walkthroughs and context setting",

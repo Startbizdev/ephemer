@@ -13,7 +13,7 @@ import { breadcrumbJsonLd, SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Pricing — Hire senior engineers | Ephemer",
   description:
-    "Transparent pricing from $65/h. No agency markup. No hidden costs. Full-time contract, fractional, or project-based. See what you'll pay before you commit.",
+    "Transparent pricing tailored to mission complexity and seniority. Full-time contract, fractional, or project-based. No hidden fees.",
   alternates: { canonical: `${SITE_URL}/hire/pricing` },
 };
 
@@ -21,21 +21,18 @@ const pricingTiers = [
   {
     name: "Full-time contract",
     description: "40 hours per week. Minimum 3 months.",
-    hourlyRate: "$65–120",
     details: [
       "Full-time availability (40h/week)",
       "Minimum 3-month engagement",
       "US or international timezone",
       "Full benefits/compliance handled",
-      "Contractor-to-hire option (20% of hourly rate)",
+      "Contractor-to-hire option available",
     ],
-    estimated: "$10,400–19,200/month",
     use: "Build out a team capability, unblock roadmap sprint, core infrastructure work",
   },
   {
     name: "Fractional",
     description: "2–3 days per week. Minimum 1 month.",
-    hourlyRate: "$75–140",
     details: [
       "2–3 days per week flexibility",
       "Minimum 1-month engagement",
@@ -43,13 +40,11 @@ const pricingTiers = [
       "Scale up to full-time if needed",
       "Ideal for specialized or short-term needs",
     ],
-    estimated: "$3,000–8,400/month",
     use: "Specialized expertise (ML, platform, security), interim leadership, technical debt cleanup",
   },
   {
     name: "Project-based",
     description: "Scoped deliverable. Defined milestones.",
-    hourlyRate: "$80–150",
     details: [
       "Fixed scope and deliverables",
       "Milestone-based payment",
@@ -57,7 +52,6 @@ const pricingTiers = [
       "Clear success criteria upfront",
       "Code audit, architecture design, migration work",
     ],
-    estimated: "$20,000–60,000+",
     use: "Specific technical initiative, migration, audit, or system redesign",
   },
 ];
@@ -75,12 +69,12 @@ const included = [
 ];
 
 const comparison = [
-  { feature: "Agency markup", ephemer: "0%", traditional: "20–35%" },
   { feature: "Time to hire", ephemer: "5–10 days", traditional: "8–16 weeks" },
-  { feature: "Upfront costs", ephemer: "$0", traditional: "Contingency fees" },
   { feature: "Interview rounds", ephemer: "1 technical", traditional: "3–5" },
   { feature: "Profile matching", ephemer: "24–48h", traditional: "2–4 weeks" },
   { feature: "Replacement guarantee", ephemer: "30 days", traditional: "Varies" },
+  { feature: "Vetting depth", ephemer: "3-layer technical", traditional: "Varies" },
+  { feature: "Direct relationship", ephemer: "Day one", traditional: "Via recruiter" },
 ];
 
 export default function PricingPage() {
@@ -97,11 +91,10 @@ export default function PricingPage() {
       {/* Hero */}
       <Section className="pt-24 pb-16">
         <Heading as="h1" size="xl" className="mb-6 max-w-3xl">
-          Transparent pricing. No surprises.
+          Pricing tailored to your mission.
         </Heading>
         <TextBlock size="lg" className="max-w-2xl">
-          You see rates and terms before you commit. No 20–35% agency markup. No tiered pricing
-          games. What you pay for is clear from the start.
+          Rates are scoped to mission complexity, seniority, and engagement structure. We share a full transparent breakdown on the intro call. No hidden fees. No surprises.
         </TextBlock>
       </Section>
 
@@ -114,15 +107,7 @@ export default function PricingPage() {
               className="border border-carbon rounded-2xl p-8 flex flex-col hover:border-indigo-600/30 transition-colors"
             >
               <h3 className="text-lg font-700 text-snow mb-2">{tier.name}</h3>
-              <p className="text-sm text-zinc-400 mb-6">{tier.description}</p>
-
-              <div className="mb-8">
-                <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-2">
-                  Hourly rate
-                </p>
-                <p className="text-3xl font-tight font-800 text-indigo-400 mb-1">{tier.hourlyRate}</p>
-                <p className="text-xs text-zinc-500">Estimated monthly: {tier.estimated}</p>
-              </div>
+              <p className="text-sm text-zinc-400 mb-8">{tier.description}</p>
 
               <ul className="space-y-3 mb-8 flex-1">
                 {tier.details.map((detail) => (

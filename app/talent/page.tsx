@@ -13,7 +13,7 @@ import { breadcrumbJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Join Ephemer — Contract opportunities for senior engineers | Ephemer",
   description:
-    "Senior engineers: join the Ephemer network. Contract work with high-growth startups. Flexible engagement. Direct client relationships. $65–150/h.",
+    "Senior engineers: join the Ephemer network. Contract work with high-growth startups. Flexible engagement. Direct client relationships. Transparent rates.",
   alternates: { canonical: `${SITE_URL}/talent` },
 };
 
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: "What rates do you offer?",
-    a: "Rates vary by seniority and specialization: $65–75/h junior-senior boundary, $75–120/h senior, $120–150/h staff/specialist. All-inclusive—no hidden platform fees.",
+    a: "Rates are scoped to mission complexity, seniority, and engagement structure. We share a transparent breakdown during your initial conversation. All-inclusive—no hidden platform fees.",
   },
   {
     q: "How do missions work?",
@@ -96,6 +96,35 @@ export default function TalentPage() {
           </Heading>
         </div>
         <FeatureGrid features={benefits} columns={3} />
+      </Section>
+
+      {/* Proof Section */}
+      <Section>
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Metrics */}
+          <div className="border border-carbon rounded-2xl p-8">
+            <p className="text-xs font-mono uppercase tracking-widest text-indigo-400 mb-4">Volume & Velocity</p>
+            <p className="text-3xl font-tight font-800 text-snow mb-2">43+</p>
+            <p className="text-sm text-zinc-400 mb-8">Active missions this month across global time zones</p>
+
+            <p className="text-xs font-mono uppercase tracking-widest text-indigo-400 mb-4">Response time</p>
+            <p className="text-lg font-600 text-snow mb-2">Profile reviewed within 48 hours</p>
+            <p className="text-sm text-zinc-400">First mission brief within 2 weeks if matched</p>
+          </div>
+
+          {/* Testimonial */}
+          <div className="border border-carbon rounded-2xl p-8 flex flex-col justify-between">
+            <blockquote>
+              <p className="text-sm text-zinc-300 mb-6 leading-relaxed italic">
+                "I have done 3 missions through Ephemer. Each time the brief was clear, the company was serious, and I got paid on time."
+              </p>
+            </blockquote>
+            <footer>
+              <p className="font-600 text-snow">Senior Backend Engineer</p>
+              <p className="text-sm text-zinc-400">formerly at Stripe</p>
+            </footer>
+          </div>
+        </div>
       </Section>
 
       {/* How it works */}
